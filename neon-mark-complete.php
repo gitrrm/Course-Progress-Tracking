@@ -48,3 +48,6 @@ function run_neon_mark_complete() {
     $settings->register_settings();
 }
 run_neon_mark_complete();
+
+// Include frontend display
+// require_once plugin_dir_path(__FILE__) . 'includes/frontend-display.php';

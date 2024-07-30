@@ -10,12 +10,9 @@ class Neon_Mark_Complete_Admin {
 
 	    add_action( 'admin_init', array( $this, 'register_settings' ) );
 	    add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+        add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
 	}
 
-    
-    public function enqueue_styles() {
-        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/neon-mark-complete-admin.css', array(), $this->version, 'all' );
-    }
     public function add_plugin_admin_menu() {
         add_menu_page(
             'Neon Mark Complete',
@@ -285,5 +282,20 @@ class Neon_Mark_Complete_Admin {
             Bottom
         </label>
         <?php
+    }
+    public function enqueue_styles() {
+        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/neon-mark-complete-admin.css', array(), $this->version, 'all' );
+    }
+    public function enqueue_admin_scripts() {
+        // if ($hook !== 'settings_page_neon-mark-complete-settings') {
+        //     return;
+        // }
+        wp_enqueue_script(
+            'neon-mark-complete-admin',
+            plugin_dir_url(__FILE__) . 'js/neon-mark-complete-admin.js',
+            array('jquery'),
+            '1.0.0',
+            true
+        );
     }
 }
